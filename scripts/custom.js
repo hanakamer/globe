@@ -1,6 +1,7 @@
 var planet = planetaryjs.planet();
 var canvas = document.getElementById('globe');
 var ctx = canvas.getContext('2d');
+
 var colors = ["#FFFFFF",
               "#FFFFA8",
               "#FFFF00",
