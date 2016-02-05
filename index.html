@@ -4,22 +4,41 @@
     <meta charset="utf-8">
     <title>globe</title>
     <link rel="stylesheet" href="style/css/master.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="style/css/jquery-ui.min.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="vendor/d3.v3.min.js"></script>
     <script type="text/javascript" src="vendor/topojson.v1.min.js"></script>
-    <script type="text/javascript" src="vendor/queue.v1.min.js">
+    <script type="text/javascript" src="vendor/planetaryjs.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="scripts/plugins/drawCircle.js"></script>
+    <script type="text/javascript" src="scripts/plugins/autoScale.js"></script>
+    <script type="text/javascript" src="scripts/plugins/autoCenter.js"></script>
 
-    </script>
   </head>
 
   <body>
-    <div class="container-fluid map-container">
-    <div class="row">
-      <h1></h1>
-        <div id="globeParent">
+<div class="toggle-button"> HIDE CONTROL PANEL </div>
+    <div class="control-panel">
+      <p>
+        <label for="radius">Angle:</label>
+        <input type="text" id="radius" readonly >
+      </p>
+      <div id="angle-slider" class="slider"></div>
+      <p>
+        <label for="magnitude">Magnitude:</label>
+        <input type="text" id="magnitude" readonly>
+      </p>
+      <div id="magnitude-slider" class="slider"></div>
 
-        </div>
     </div>
+    <div class="main-content">
+    <canvas id='globe'></canvas>
+    <a href="http://www.freepik.com/free-vector/abstract-space-background-in-gradient-style_807252.htm">Designed by Freepik</a>
     </div>
     <script type="text/javascript" src="scripts/custom.js"></script>
+    <script type="text/javascript" src="scripts/angleSlider.js"></script>
+    <script type="text/javascript" src="scripts/magnitudeSlider.js"></script>
+    <script type="text/javascript" src="scripts/resetSliders.js"></script>
+    <script type="text/javascript" src="scripts/toggleControlPanel.js"></script>
   </body>
 </html>
