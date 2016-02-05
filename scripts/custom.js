@@ -1,73 +1,67 @@
-var width = 960,
-    height = 500;
+var planet = planetaryjs.planet();
+var canvas = document.getElementById('globe');
+var ctx = canvas.getContext('2d');
+var colors = ["#FFFFFF",
+              "#FFFFA8",
+              "#FFFF00",
+              "#FFDB00",
+              "#FFA500",
+              "#FF5E00",
+              "#FF0000",
+              "#C70039",
+              "#800080"]
 
-var projection = d3.geo.orthographic() //an azimuthal projection suitable for displaying a single hemisphere
-    .scale(180)
-    .clipAngle(90)
-    .translate([width/2, height/2]); //sets the projection’s translation offset to the specified two-element array [x, y] and returns the projection.
+planet.loadPlugin(planetaryjs.plugins.earth({
+  topojson: { file: 'raw/world-110m.json' },
+  oceans:   { fill:   '#455F58' },
+  land:     { fill:   '#3B2619' },
+  borders:  { stroke: '#99AB58' }
+}));
 
-var canvas = d3.select("#globeParent").append("canvas")
-    .attr("width", width)
-    .attr("height", height)
-    .style("cursor", "move");
+planet.loadPlugin(autocenter({extraHeight: -55}));
 
-var context = canvas.node().getContext("2d");
+planet.loadPlugin(autoscale({extraHeight: -55}));
 
-var path = d3.geo.path()
-    .projection(projection)
-    .context(context)
+planet.loadPlugin(planetaryjs.plugins.pings());
 
-var title = d3.select("h1");
+planet.loadPlugin(planetaryjs.plugins.zoom({
+  scaleExtent: [100, 10000]
+}));
 
-var zoom = d3.behavior.zoom()
-    .translate([0,0])
-    .scale(1)
-    .scaleExtent([1, 8]);
-
-
-
-
-queue()
-   .defer(d3.json, "raw/world-110m.json")
-   .defer(d3.tsv, "raw/country-names.tsv")
-   .await(ready);
+planet.loadPlugin(planetaryjs.plugins.circles());
 
 
+var mdLong,
+    mdLat,
+    muLong,
+    muLat;
 
+d3.select("canvas").on("mousedown", function() {
+  mdLong = planet.projection.invert(d3.mouse(this))[0];
+  mdLat = planet.projection.invert(d3.mouse(this))[1];
+});
 
-function ready(error, world, names) {
-    if (error) throw error;
+d3.select("canvas").on("mouseup", function() {
+  muLong = planet.projection.invert(d3.mouse(this))[0];
+  muLat = planet.projection.invert(d3.mouse(this))[1];
+});
 
-    var globe = {type: "Sphere"},
-        land = topojson.feature(world, world.objects.land),
-        countries = topojson.feature(world, world.objects.countries).features,
-        borders = topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; }),
-        i = -1,
-        n = countries.length;
+d3.select("canvas").on("click", function() {
+  var deltaLong = mdLong-muLong;
+  var deltaLan = mdLat-muLat;
 
-    canvas
-      .call(zoom.on("zoom", zoomed))
-      .call(zoom.event);
-    var startCoord = d3.geo.centroid(journey[0]),
-        endCoord = d3.geo.centroid(journey[1])
-    var coords = [-startCoord[0], -startCoord[1]]
-    projection.rotate(coords);
-
-    function zoomed() {
-        var t = zoom.translate(),
-            s = zoom.scale();
-
-        context.clearRect(0, 0, width, height);
-        context.save();
-        context.translate(t[0], t[1]);
-        context.scale(s, s);
-        context.lineWidth = 1 / s;
-        context.fillStyle = "#e5e5ff", context.beginPath(), path(globe), context.fill();
-        context.fillStyle = "#ccffcc", context.beginPath(), path(land), context.fill();
-        context.fillStyle = "#f00", context.beginPath(), path(countries[i]), context.fill();
-        context.strokeStyle = "yellow", context.lineWidth = .5, context.beginPath(), path(borders), context.stroke();
-        context.strokeStyle = "#000", context.lineWidth = 1, context.beginPath(), path(globe), context.stroke();
-        context.restore();
+  console.log(" delta lan:"+deltaLan+" delta long:"+deltaLong);
+  if (deltaLong==0 && deltaLan==0) {
+    resetSlider();
+    planet.plugins.circles.add(mdLong, mdLat);
+    console.log(" delta lan:"+deltaLan+" delta long:"+deltaLong);
   }
+});
 
-}
+
+
+planet.loadPlugin(planetaryjs.plugins.drag());
+
+planet.projection.translate([canvas.height, canvas.width]);
+
+planet.draw(canvas);
