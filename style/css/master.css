@@ -9,7 +9,8 @@ body {
   background:url('../images/abstract-space.jpg');
   color:white;
   font-family: dual;
-  padding: 15px;
+  padding: 0;
+  margin: 0;
 }
 
 input {
@@ -24,10 +25,16 @@ input {
   padding: 20px;
   border: 1px solid white;
   border-radius: 5px;
+  left: 20px;
+  top: 20px;
+  z-index: 20;
 }
 .toggle-button{
+  position: fixed;
   height: 18px;
+  left: 20px;
   top: 0;
+  z-index:20;
 
 }
 .ui-slider{
@@ -41,4 +48,17 @@ input {
   border-radius: 0 !important;
   height: 15px !important;
   width: 5px !important;
+}
+
+#globe {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+.citation {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
 }

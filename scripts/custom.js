@@ -19,9 +19,9 @@ planet.loadPlugin(planetaryjs.plugins.earth({
   borders:  { stroke: '#99AB58' }
 }));
 
-planet.loadPlugin(autocenter({extraHeight: -55}));
+planet.loadPlugin(autocenter());
 
-planet.loadPlugin(autoscale({extraHeight: -55}));
+planet.loadPlugin(autoscale());
 
 planet.loadPlugin(planetaryjs.plugins.pings());
 
