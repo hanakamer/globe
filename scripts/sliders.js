@@ -10,9 +10,9 @@ $( "#angle-slider" ).slider({
         angle,
         radius = 6371;
     if(planet.plugins.circles){
-      planet.plugins.circles.setRadius($("#angle-slider").slider("value"));
+      planet.plugins.circles.setRadius(ui.value);
     }
-    angle = $("#angle-slider").slider("value");
+    angle = ui.value;
     capRadius = calculateCapRadius(angle, radius).toFixed(2);
     $("#radius").val(capRadius +"km");
   }
@@ -26,11 +26,12 @@ $( "#magnitude-slider" ).slider({
   value: 0.1,
   slide: function(event, ui) {
     color = "white";
-    mgn = $("#magnitude-slider").slider("value");
+    mgn = ui.value;
     color= colors[Math.round(mgn)];
-    $("#magnitude").val($("#magnitude-slider").slider("value"));
+    $("#magnitude").val(mgn);
   }
 });
+
 
 function resetSlider() {
   $("#angle-slider").slider('value',0);
