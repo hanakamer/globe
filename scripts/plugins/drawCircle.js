@@ -1,5 +1,5 @@
 planetaryjs.plugins.circles = function(config) {
-  var circle;
+  var circle, center;
   var lat;
   var long;
 
@@ -7,6 +7,8 @@ planetaryjs.plugins.circles = function(config) {
     lat = _lat;
     long = _long;
     circle = d3.geo.circle().origin([_long, _lat]).angle(0.4)();
+    center = d3.geo.circle().origin([_long, _lat]).angle(0.1)();
+
   }
 
   var setRadius = function(angle){
@@ -26,6 +28,12 @@ planetaryjs.plugins.circles = function(config) {
         ctx.fillStyle = mgn_color;
         ctx.globalAlpha = 0.5;
         planet.path.context(ctx)(circle);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.globalAlpha = 1;
+        planet.path.context(ctx)(center);
         ctx.fill();
       });
     });
