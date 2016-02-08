@@ -31,15 +31,26 @@ planet.loadPlugin(planetaryjs.plugins.zoom({
 
 planet.loadPlugin(planetaryjs.plugins.circles());
 
-
-var mdLong,
+var mmLong,
+    mmLat,
+    mdLong,
     mdLat,
     muLong,
     muLat;
 
+d3.select("canvas").on("mousemove", function() {
+  mmLong = planet.projection.invert(d3.mouse(this))[0];
+  mmLat = planet.projection.invert(d3.mouse(this))[1];
+  if (mmLat & mmLong){
+    document.querySelector('#lat').value = mmLat.toFixed(4)+String.fromCharCode(176);
+    document.querySelector('#long').value = mmLong.toFixed(4)+String.fromCharCode(176);
+  }
+});
+
 d3.select("canvas").on("mousedown", function() {
   mdLong = planet.projection.invert(d3.mouse(this))[0];
   mdLat = planet.projection.invert(d3.mouse(this))[1];
+
 });
 
 d3.select("canvas").on("mouseup", function() {
@@ -50,12 +61,14 @@ d3.select("canvas").on("mouseup", function() {
 d3.select("canvas").on("click", function() {
   var deltaLong = mdLong-muLong;
   var deltaLan = mdLat-muLat;
-
-  console.log(" delta lan:"+deltaLan+" delta long:"+deltaLong);
   if (deltaLong==0 && deltaLan==0) {
     resetSlider();
     planet.plugins.circles.add(mdLong, mdLat);
-    console.log(" delta lan:"+deltaLan+" delta long:"+deltaLong);
+    $("#globe").one( "mousemove", function() {
+      $('.control-panel').animate({
+        left: "20px",
+      }, 600 );
+    } );
   }
 });
 

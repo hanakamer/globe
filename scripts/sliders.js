@@ -1,41 +1,28 @@
 var color;
 var mgn = 0;
-$( "#angle-slider" ).slider({
-  step:0.001,
-  min: 0,
-  max: 7,
-  value: 1,
-  slide: function(event, ui) {
-    var capRadius,
-        angle,
-        radius = 6371;
-    if(planet.plugins.circles){
-      planet.plugins.circles.setRadius(ui.value);
-    }
-    angle = ui.value;
-    capRadius = calculateCapRadius(angle, radius).toFixed(2);
-    $("#radius").val(capRadius +"km");
+
+function outputRadius(_angle) {
+  var capRadius;
+  var radius = 6371;
+  var angle = _angle;
+
+  if(planet.plugins.circles){
+    planet.plugins.circles.setRadius(angle);
   }
 
-});
+  capRadius = calculateCapRadius(angle, radius).toFixed(2);
+	document.querySelector('#radius').value = capRadius;
+}
 
-$( "#magnitude-slider" ).slider({
-  step:0.1,
-  min: 0,
-  max: 10,
-  value: 0.1,
-  slide: function(event, ui) {
-    color = "white";
-    mgn = ui.value;
-    color= colors[Math.round(mgn)];
-    $("#magnitude").val(mgn);
-  }
-});
-
+function outputMagnitude(mgn) {
+  document.querySelector('#magnitude').value = mgn;
+  color= colors[Math.round(mgn)];
+}
 
 function resetSlider() {
-  $("#angle-slider").slider('value',0);
-  $("#radius").val($("#angle-slider").slider("value"));
-  $("#magnitude-slider").slider('value',0);
-  $("#magnitude").val($("#magnitude-slider").slider("value"));
+  document.querySelector('#radius').value = 0;
+  document.querySelector('#rad-slider').value = 0;
+  document.querySelector('#magnitude').value = 0;
+  document.querySelector('#mgn-slider').value = 0;
+
 }

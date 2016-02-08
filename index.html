@@ -4,12 +4,10 @@
     <meta charset="utf-8">
     <title>globe</title>
     <link rel="stylesheet" href="style/css/master.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="style/css/jquery-ui.min.css" media="screen" title="no title" charset="utf-8">
     <script type="text/javascript" src="vendor/d3.v3.min.js"></script>
     <script type="text/javascript" src="vendor/topojson.v1.min.js"></script>
     <script type="text/javascript" src="vendor/planetaryjs.min.js"></script>
     <script type="text/javascript" src="vendor/jquery-1.12.0.min.js"></script>
-    <script type="text/javascript" src="vendor/jquery-ui.min.js"></script>
     <script type="text/javascript" src="scripts/plugins/drawCircle.js"></script>
     <script type="text/javascript" src="scripts/plugins/autoScale.js"></script>
     <script type="text/javascript" src="scripts/plugins/autoCenter.js"></script>
@@ -17,19 +15,27 @@
   </head>
 
   <body>
-<div class="toggle-button"> HIDE CONTROL PANEL </div>
-    <div class="control-panel">
-      <p>
-        <label for="radius">Angle:</label>
-        <input type="text" id="radius" readonly >
-      </p>
-      <div id="angle-slider" class="slider"></div>
-      <p>
-        <label for="magnitude">Magnitude:</label>
-        <input type="text" id="magnitude" readonly>
-      </p>
-      <div id="magnitude-slider" class="slider"></div>
 
+    <div class="control-panel">
+      <div class="toggle-button"> CONTROL PANEL </div>
+      <div class="control slider-container">
+        <label class="slider-label" for="rad-slider">Radius</label>
+        <output class="slider-output" for="rad-slider" id="radius"></output>
+        <input class="slider" type="range" min="0" max="10" value="2" id="rad-slider" step="0.001" oninput="outputRadius(value)">
+      </div>
+      <div class="control slider-container">
+        <label class="slider-label" for="mgn-slider">Magnitude</label>
+        <output class="slider-output" for="mgn-slider" id="magnitude"></output>
+        <input class="slider" type="range" min="0.1" max="10" value="0.1" id="mgn-slider" step="0.1" oninput="outputMagnitude(value)" >
+      </div>
+      <div class="control">
+        <label for="lat">Lat</label>
+        <input id="lat" type="text"  readonly value='0 &deg;' />
+      </div>
+      <div class="control">
+        <label for="long">Long</label>
+        <input id="long" type="text"  readonly value='0 &deg;'/>
+      </div>
     </div>
     <div class="main-content">
     <canvas id='globe'></canvas>
@@ -37,7 +43,6 @@
     </div>
     <script type="text/javascript" src="scripts/custom.js"></script>
     <script type="text/javascript" src="scripts/sliders.js"></script>
-    <script type="text/javascript" src="scripts/toggleControlPanel.js"></script>
     <script type="text/javascript" src="scripts/calculations.js"></script>
   </body>
 </html>
