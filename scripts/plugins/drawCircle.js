@@ -23,7 +23,7 @@ planetaryjs.plugins.circles = function(config) {
       if (!circle) return false;
       planet.withSavedContext(function(ctx) {
         ctx.beginPath();
-        ctx.fillStyle = color;
+        ctx.fillStyle = mgn_color;
         ctx.globalAlpha = 0.5;
         planet.path.context(ctx)(circle);
         ctx.fill();

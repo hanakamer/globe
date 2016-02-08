@@ -1,4 +1,4 @@
-var color;
+var mgn_color = "white";
 var mgn = 0;
 
 function outputRadius(_angle) {
@@ -11,16 +11,16 @@ function outputRadius(_angle) {
   }
 
   capRadius = calculateCapRadius(angle, radius).toFixed(2);
-	document.querySelector('#radius').value = capRadius;
+	document.querySelector('#radius').value = capRadius+" km";
 }
 
 function outputMagnitude(mgn) {
   document.querySelector('#magnitude').value = mgn;
-  color= colors[Math.round(mgn)];
+  mgn_color= colors[Math.round(mgn)];
 }
 
 function resetSlider() {
-  document.querySelector('#radius').value = 0;
+  document.querySelector('#radius').value = 0 + " km";
   document.querySelector('#rad-slider').value = 0;
   document.querySelector('#magnitude').value = 0;
   document.querySelector('#mgn-slider').value = 0;

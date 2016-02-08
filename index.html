@@ -17,25 +17,28 @@
   <body>
 
     <div class="control-panel">
-      <div class="toggle-button"> CONTROL PANEL </div>
+      <div class="panel-header"> CONTROL PANEL </div>
       <div class="control slider-container">
-        <label class="slider-label" for="rad-slider">Radius</label>
+        <label class="slider-label" for="rad-slider">Radius:</label>
         <output class="slider-output" for="rad-slider" id="radius"></output>
         <input class="slider" type="range" min="0" max="10" value="2" id="rad-slider" step="0.001" oninput="outputRadius(value)">
       </div>
       <div class="control slider-container">
-        <label class="slider-label" for="mgn-slider">Magnitude</label>
+        <label class="slider-label" for="mgn-slider">Magnitude:</label>
         <output class="slider-output" for="mgn-slider" id="magnitude"></output>
         <input class="slider" type="range" min="0.1" max="10" value="0.1" id="mgn-slider" step="0.1" oninput="outputMagnitude(value)" >
       </div>
       <div class="control">
-        <label for="lat">Lat</label>
-        <input id="lat" type="text"  readonly value='0 &deg;' />
+        <p>Selected center:</p>
+        <label for="lat_selected">lat: <input class = "coord" id="lat_selected" type="text"  readonly value='0 &deg;' /></label>
+        <label for="long_selected">long: <input class = "coord" id="long_selected" type="text"  readonly value='0 &deg;'/></label>
       </div>
       <div class="control">
-        <label for="long">Long</label>
-        <input id="long" type="text"  readonly value='0 &deg;'/>
+        <p>Current position:</p>
+        <label for="lat">lat: <input class = "coord" id="lat" type="text"  readonly value='0 &deg;' /></label>
+        <label for="long">long: <input class = "coord" id="long" type="text"  readonly value='0 &deg;'/></label>
       </div>
+
     </div>
     <div class="main-content">
     <canvas id='globe'></canvas>

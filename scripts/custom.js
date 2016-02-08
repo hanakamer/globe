@@ -41,9 +41,12 @@ var mmLong,
 d3.select("canvas").on("mousemove", function() {
   mmLong = planet.projection.invert(d3.mouse(this))[0];
   mmLat = planet.projection.invert(d3.mouse(this))[1];
-  if (mmLat & mmLong){
+  if (mmLat || mmLong){
     document.querySelector('#lat').value = mmLat.toFixed(4)+String.fromCharCode(176);
     document.querySelector('#long').value = mmLong.toFixed(4)+String.fromCharCode(176);
+  } else {
+    document.querySelector('#lat').value = 0;
+    document.querySelector('#long').value = 0;
   }
 });
 
@@ -63,6 +66,8 @@ d3.select("canvas").on("click", function() {
   var deltaLan = mdLat-muLat;
   if (deltaLong==0 && deltaLan==0) {
     resetSlider();
+    document.querySelector('#lat_selected').value = mdLat.toFixed(4)+String.fromCharCode(176);
+    document.querySelector('#long_selected').value = mdLong.toFixed(4)+String.fromCharCode(176);
     planet.plugins.circles.add(mdLong, mdLat);
     $("#globe").one( "mousemove", function() {
       $('.control-panel').animate({
