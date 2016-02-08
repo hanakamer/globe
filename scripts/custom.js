@@ -2,7 +2,7 @@ var planet = planetaryjs.planet();
 var canvas = document.getElementById('globe');
 var ctx = canvas.getContext('2d');
 
-var colors = ["#FFFFFF",
+var color_palet = ["#FFFFFF",
               "#FFFFA8",
               "#FFFF00",
               "#FFDB00",
@@ -11,6 +11,7 @@ var colors = ["#FFFFFF",
               "#FF0000",
               "#C70039",
               "#800080"]
+var colors = chroma.scale(color_palet).colors(100);
 
 planet.loadPlugin(planetaryjs.plugins.earth({
   topojson: { file: 'raw/world-110m.json' },
@@ -84,3 +85,5 @@ planet.loadPlugin(planetaryjs.plugins.drag());
 planet.projection.translate([canvas.height, canvas.width]);
 
 planet.draw(canvas);
+
+chroma.scale(['white','green','blue']).colors(5);

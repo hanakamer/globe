@@ -16,7 +16,7 @@ function outputRadius(_angle) {
 
 function outputMagnitude(mgn) {
   document.querySelector('#magnitude').value = mgn;
-  mgn_color= colors[Math.round(mgn)];
+  mgn_color= colors[mgn*10-1];
 }
 
 function resetSlider() {

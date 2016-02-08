@@ -61,5 +61,7 @@ input {
 .citation {
   position: fixed;
   bottom: 10px;
-  left: 20px;
+  right: 20px;
+  color: yellow;
+  z-index: 20;
 }
