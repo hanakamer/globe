@@ -24,5 +24,5 @@ function resetSlider() {
   document.querySelector('#rad-slider').value = 0;
   document.querySelector('#magnitude').value = 0;
   document.querySelector('#mgn-slider').value = 0;
-
+  mgn_color = "white";
 }

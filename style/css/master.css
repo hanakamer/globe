@@ -65,3 +65,12 @@ input {
   color: yellow;
   z-index: 20;
 }
+.ribbon {
+  z-index: 19;
+  height: 173px;
+  width: auto;
+  position: fixed;
+  transform: rotate(40deg);
+  right: 400px;
+  top: 100px;
+}

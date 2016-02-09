@@ -30,9 +30,13 @@
         <input class="slider" type="range" min="0.1" max="10" value="0.1" id="mgn-slider" step="0.1" oninput="outputMagnitude(value)" >
       </div>
       <div class="control">
-        <p>Selected center:</p>
+        <p>Selected coordinates:</p>
         <label for="lat_selected">lat: <input class = "coord" id="lat_selected" type="text"  readonly value='0 &deg;' /></label>
         <label for="long_selected">long: <input class = "coord" id="long_selected" type="text"  readonly value='0 &deg;'/></label>
+      </div>
+      <div class="control">
+        <p>Selected city:</p>
+        <label for="city_selected"> <input class = "city" id="city_selected" type="text"  readonly /></label>
       </div>
       <div class="control">
         <p>Current position:</p>
@@ -42,7 +46,9 @@
 
     </div>
     <div class="main-content">
+
     <canvas id='globe'></canvas>
+      <img class="ribbon" src="style/images/ribbon.png" alt="" />
     <a class="citation" href="http://www.freepik.com/free-vector/abstract-space-background-in-gradient-style_807252.htm">Image Designed by Freepik</a>
     </div>
     <script type="text/javascript" src="scripts/custom.js"></script>

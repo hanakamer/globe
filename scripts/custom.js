@@ -67,6 +67,10 @@ d3.select("canvas").on("click", function() {
   var deltaLan = mdLat-muLat;
   if (deltaLong==0 && deltaLan==0) {
     resetSlider();
+    getCityCountry(mdLat, mdLong, function(response){
+      document.querySelector('#city_selected').value = response;
+
+    });
     document.querySelector('#lat_selected').value = mdLat.toFixed(4)+String.fromCharCode(176);
     document.querySelector('#long_selected').value = mdLong.toFixed(4)+String.fromCharCode(176);
     planet.plugins.circles.add(mdLong, mdLat);
@@ -75,9 +79,21 @@ d3.select("canvas").on("click", function() {
         left: "20px",
       }, 600 );
     } );
+
   }
 });
 
+function getCityCountry(lat, long, callback){
+  $.ajax({ url:'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&sensor=true',
+        crossDomain:true,
+        success: function(response){
+            var i = response.results[0].address_components.length;
+            callback(response.results[0].address_components[i-3].long_name + ', ' +
+              response.results[0].address_components[i-2].long_name
+            );
+         }
+       });
+     }
 
 
 planet.loadPlugin(planetaryjs.plugins.drag());

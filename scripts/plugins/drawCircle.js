@@ -32,15 +32,14 @@ planetaryjs.plugins.circles = function(config) {
 
         for (var obj in innerCircles){
           ctx.beginPath();
-          ctx.strokeStyle = "white";
-          ctx.strokeStyle =colors[colors.indexOf(mgn_color)-obj*5];
+          ctx.strokeStyle = colors[colors.indexOf(mgn_color)-obj * 5] || "white";
           ctx.globalAlpha = 1;
           planet.path.context(ctx)(innerCircles[obj]);
           ctx.stroke();
         }
 
         ctx.beginPath();
-        ctx.fillStyle = mgn_color;
+        ctx.fillStyle = mgn_color || "white";
         ctx.globalAlpha = 0.1;
         planet.path.context(ctx)(circle);
         ctx.fill();
