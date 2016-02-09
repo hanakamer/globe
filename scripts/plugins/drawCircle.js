@@ -8,14 +8,14 @@ planetaryjs.plugins.circles = function(config) {
     lat = _lat;
     long = _long;
     circle = d3.geo.circle().origin([_long, _lat]).angle(0.4)();
-    center = d3.geo.circle().origin([_long, _lat]).angle(0.2)();
+    center = d3.geo.circle().origin([_long, _lat]).angle(0.07)();
     innerCircles = [];
   }
 
   var setRadius = function(angle){
     circle = d3.geo.circle().origin([long, lat]).angle(angle)();
     innerCircles = [];
-    for (var i = 0.1; i<angle; i+=0.7){
+    for (var i = 0; i<angle; i+=0.25){
       innerCircles.push(d3.geo.circle().origin([long, lat]).angle(i)());
     }
   }

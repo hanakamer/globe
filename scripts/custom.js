@@ -1,7 +1,7 @@
 var planet = planetaryjs.planet();
 var canvas = document.getElementById('globe');
 var ctx = canvas.getContext('2d');
-
+var flag = true;
 var color_palet = ["#FFFFFF",
               "#FFFFA8",
               "#FFFF00",
@@ -10,7 +10,8 @@ var color_palet = ["#FFFFFF",
               "#FF5E00",
               "#FF0000",
               "#C70039",
-              "#800080"]
+              "#800080"];
+
 var colors = chroma.scale(color_palet).colors(100);
 
 planet.loadPlugin(planetaryjs.plugins.earth({
@@ -19,6 +20,7 @@ planet.loadPlugin(planetaryjs.plugins.earth({
   land:     { fill:   '#3B2619' },
   borders:  { stroke: '#99AB58' }
 }));
+
 
 planet.loadPlugin(autocenter());
 
@@ -69,16 +71,20 @@ d3.select("canvas").on("click", function() {
     resetSlider();
     getCityCountry(mdLat, mdLong, function(response){
       document.querySelector('#city_selected').value = response;
-
     });
     document.querySelector('#lat_selected').value = mdLat.toFixed(4)+String.fromCharCode(176);
     document.querySelector('#long_selected').value = mdLong.toFixed(4)+String.fromCharCode(176);
     planet.plugins.circles.add(mdLong, mdLat);
-    $("#globe").one( "mousemove", function() {
+    while (flag){
       $('.control-panel').animate({
         left: "20px",
       }, 600 );
-    } );
+
+      planet.plugins.pings.add(mdLong, mdLat, { color: "white", ttl: 2000, angle: 10 });
+
+      flag = false;
+    }
+
 
   }
 });
