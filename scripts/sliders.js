@@ -22,7 +22,7 @@ function outputMagnitude(mgn) {
 function resetSlider() {
   document.querySelector('#radius').value = 0 + " km";
   document.querySelector('#rad-slider').value = 0;
-  document.querySelector('#magnitude').value = 0;
+  document.querySelector('#magnitude').value = 3;
   document.querySelector('#mgn-slider').value = 0;
   mgn_color = "white";
 }
