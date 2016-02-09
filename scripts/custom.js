@@ -91,6 +91,8 @@ function getCityCountry(lat, long, callback){
             callback(response.results[0].address_components[i-3].long_name + ', ' +
               response.results[0].address_components[i-2].long_name
             );
+
+
          }
        });
      }
