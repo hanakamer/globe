@@ -1,2 +1,6 @@
 *.DS_Store
-/app/venv
+# Virtualenv
+.Python
+bin
+lib
+include
