@@ -69,3 +69,8 @@ input {
   color: yellow;
   z-index: 20;
 }
+
+#guide {
+  text-align: center;
+  font-size: 15px;
+}
